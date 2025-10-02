@@ -1,0 +1,118 @@
+User Query: What functions are called by the file pngread.c?
+
+--- Agent's Thought Process ---
+
+🔧 Tool Result: get_code_map_info
+
+🔧 Tool Result: get_code_map_info
+```
+Thought: The current language of the user is: English. I need to use the tool get_code_map_info to find the functions called by pngread.c.
+Action: get_code_map_info
+Action Input: {"query": "call_map"}
+``````tool_code
+Thought: The current language of the user is: English. The tool get_code_map_info returned a large JSON object. I need to filter the JSON object to find the functions called by pngread.c.
+Action: get_code_map_info
+Action Input: {"query": "code_map"}
+``````tool_code
+Thought: The current language of the user is: English. The tool get_code_map_info returned a large JSON object. I need to filter the JSON object to find the functions called by pngread.c. I already have the call map, so I can answer the question.
+Answer: The following functions are called by pngread.c:
+
+* check
+* chromaticities_match_sRGB
+* decode_gamma
+* make_ga_colormap
+* make_gray_colormap
+* make_gray_file_colormap
+* make_rgb_colormap
+* png_app_error
+* png_benign_error
+* png_chunk_benign_error
+* png_colormap_compose
+* png_combine_row
+* png_crc_finish
+* png_create_colormap_entry
+* png_destroy_gamma_table
+* png_destroy_info_struct
+* png_destroy_png_struct
+* png_destroy_read_struct
+* png_do_read_interlace
+* png_do_read_intrapixel
+* png_do_read_transformations
+* png_free
+* png_free_data
+* png_gamma_16bit_correct
+* png_gamma_not_sRGB
+* png_gamma_significant
+* png_handle_chunk
+* png_handle_tRNS
+* png_handle_unknown
+* png_image_begin_read_from_file
+* png_image_begin_read_from_memory
+* png_image_begin_read_from_stdio
+* png_image_error
+* png_image_finish_read
+* png_image_format
+* png_image_free
+* png_image_is_not_sRGB
+* png_image_memory_read
+* png_image_read_and_map
+* png_image_read_background
+* png_image_read_colormap
+* png_image_read_colormapped
+* png_image_read_composite
+* png_image_read_direct
+* png_image_read_header
+* png_image_read_init
+* png_image_skip_unused_chunks
+* png_init_io
+* png_read_IDAT_data
+* png_read_chunk_header
+* png_read_destroy
+* png_read_end
+* png_read_filter_row
+* png_read_finish_IDAT
+* png_read_finish_row
+* png_read_image
+* png_read_info
+* png_read_png
+* png_read_row
+* png_read_rows
+* png_read_sig
+* png_read_start_row
+* png_read_transform_info
+* png_read_update_info
+* png_reciprocal
+* png_resolve_file_gamma
+* png_safe_execute
+* png_set_add_alpha
+* png_set_alpha_mode_fixed
+* png_set_background_fixed
+* png_set_benign_errors
+* png_set_bgr
+* png_set_expand
+* png_set_expand_16
+* png_set_gray_to_rgb
+* png_set_interlace_handling
+* png_set_invert_alpha
+* png_set_invert_mono
+* png_set_keep_unknown_chunks
+* png_set_packing
+* png_set_packswap
+* png_set_read_fn
+* png_set_read_status_fn
+* png_set_rgb_to_gray_fixed
+* png_set_scale_16
+* png_set_shift
+* png_set_sig_bytes
+* png_set_strip_16
+* png_set_strip_alpha
+* png_set_swap
+* png_set_swap_alpha
+* png_set_tRNS_to_alpha
+* png_start_read_image
+* png_warning
+* png_zfree
+* sRGB
+* set_file_encoding
+* struct
+```
