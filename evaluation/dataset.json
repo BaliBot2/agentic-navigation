@@ -1,0 +1,12 @@
+[
+  {
+    "type": "signature_lookup",
+    "question": "What is the signature of 'PNGLIB_MAJOR'?",
+    "ground_truth": "PNGLIB_MAJOR"
+  },
+  {
+    "type": "file_lookup",
+    "question": "In which file is 'PNGLIB_MAJOR' defined?",
+    "ground_truth": "scripts/cmake/genout.cmake.in"
+  }
+]

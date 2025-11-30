@@ -103,11 +103,18 @@ def generate_file_dependencies(repo_path="."):
         '--regexp', r'^#include\s*["<](.*)[">]'
     ]
     
-    process = subprocess.run(rg_command, capture_output=True, text=True, cwd=repo_path)
-
-    if process.returncode != 0 and process.returncode != 1: # rg returns 1 if no matches found
-        print("Error running ripgrep for includes:", process.stderr)
+    try:
+        process = subprocess.run(rg_command, capture_output=True, text=True, cwd=repo_path, check=True)
+    except FileNotFoundError:
+        print("❌ CRITICAL ERROR: 'rg' command not found. Please install ripgrep (e.g., 'brew install ripgrep' on macOS or 'sudo apt-get install ripgrep' on Linux).")
         return {}
+    except subprocess.CalledProcessError as e:
+        if e.returncode == 1: # ripgrep returns 1 if no matches are found, which is not an error for us
+            pass
+        else:
+            print(f"❌ ERROR: ripgrep failed with exit code {e.returncode}.")
+            print(f"   Stderr: {e.stderr}")
+            return {}
 
     dependencies = {}
     for line in process.stdout.strip().split('\n'):
@@ -148,11 +155,18 @@ def generate_call_graph(repo_path, function_definitions):
         "rg", "--json", "--type", "c", '--regexp', function_pattern,
     ]
 
-    process = subprocess.run(rg_command, capture_output=True, text=True, cwd=repo_path)
-    
-    if process.returncode != 0 and process.returncode != 1:
-        print("Error running ripgrep for call graph:", process.stderr)
+    try:
+        process = subprocess.run(rg_command, capture_output=True, text=True, cwd=repo_path, check=True)
+    except FileNotFoundError:
+        print("❌ CRITICAL ERROR: 'rg' command not found. Please install ripgrep (e.g., 'brew install ripgrep' on macOS or 'sudo apt-get install ripgrep' on Linux).")
         return {}
+    except subprocess.CalledProcessError as e:
+        if e.returncode == 1: # ripgrep returns 1 if no matches are found, which is not an error for us
+            pass
+        else:
+            print(f"❌ ERROR: ripgrep failed with exit code {e.returncode}.")
+            print(f"   Stderr: {e.stderr}")
+            return {}
 
     file_to_calls = {}
     for line in process.stdout.strip().split('\n'):
@@ -197,6 +211,12 @@ def visualize_dependencies(dependency_data, output_filename="file_dependencies")
     filtering out common system headers to reduce noise.
     """
     print("🎨 Visualizing file dependencies (High-Res SVG)...")
+    # ADD THIS CHECK: If graphviz is not installed, we can't proceed.
+    try:
+        subprocess.run(['dot', '-V'], capture_output=True, check=True)
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        print("❌ CRITICAL ERROR: 'dot' command not found. Make sure Graphviz is installed and in your PATH.")
+        return
     
     # List of common C standard library headers to ignore
     ignore_list = {
@@ -290,7 +310,7 @@ def visualize_call_map(call_map_data, code_map, output_filename="call_map", focu
 
 if __name__ == "__main__":
     # The C codebase is in the 'libpng' subfolder
-    REPO_PATH = r".\libpng" 
+    REPO_PATH = os.path.join(".", "libpng")
     OUTPUT_FILE = "code_structure.json"
 
     # Generate the main data structures

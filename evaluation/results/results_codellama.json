@@ -1,0 +1,18 @@
+[
+  {
+    "question": "What is the signature of 'PNGLIB_MAJOR'?",
+    "ground_truth": "PNGLIB_MAJOR",
+    "agent_answer": "The signature of 'PNGLIB_MAJOR' is '@PNGLIB_MAJOR@'.",
+    "type": "signature_lookup",
+    "model": "codellama",
+    "time_seconds": 12.02
+  },
+  {
+    "question": "In which file is 'PNGLIB_MAJOR' defined?",
+    "ground_truth": "scripts/cmake/genout.cmake.in",
+    "agent_answer": "`Makefile.in`",
+    "type": "file_lookup",
+    "model": "codellama",
+    "time_seconds": 0.73
+  }
+]

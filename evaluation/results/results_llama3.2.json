@@ -1,0 +1,18 @@
+[
+  {
+    "question": "What is the signature of 'PNGLIB_MAJOR'?",
+    "ground_truth": "PNGLIB_MAJOR",
+    "agent_answer": "$(PNGCONF)",
+    "type": "signature_lookup",
+    "model": "llama3.2",
+    "time_seconds": 4.97
+  },
+  {
+    "question": "In which file is 'PNGLIB_MAJOR' defined?",
+    "ground_truth": "scripts/cmake/genout.cmake.in",
+    "agent_answer": "$(PNGCONF)",
+    "type": "file_lookup",
+    "model": "llama3.2",
+    "time_seconds": 0.31
+  }
+]
